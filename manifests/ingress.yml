@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "yelpcampk8s-ee7c"
+    labels:
+        app: "yelpcampk8s-ee7c"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: yelpcampk8s8a52-yelpcampk8s-ee7c.8d66469e44c54a4fac51.eastus.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "yelpcampk8s-ee7c"
+                servicePort: 8080
