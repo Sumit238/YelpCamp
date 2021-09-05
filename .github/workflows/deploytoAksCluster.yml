@@ -1,0 +1,50 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: yelpcampcg.azurecr.io
+        username: ${{ secrets.acr_yelpcampcg_username }}
+        password: ${{ secrets.acr_yelpcampcg_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "DockerFile" -t yelpcampcg.azurecr.io/yelpcampk8s:${{ github.sha }} --label dockerfile-path=DockerFile
+        docker push yelpcampcg.azurecr.io/yelpcampk8s:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_yelpcampk8s_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep yelpcampk8sa154 | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace yelpcampk8sa154`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: yelpcampk8sa154
+        container-registry-url: yelpcampcg.azurecr.io
+        container-registry-username: ${{ secrets.acr_yelpcampcg_username }}
+        container-registry-password: ${{ secrets.acr_yelpcampcg_password }}
+        secret-name: yelpcampk8sdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: yelpcampk8sa154
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          yelpcampcg.azurecr.io/yelpcampk8s:${{ github.sha }}
+        imagepullsecrets: |
+          yelpcampk8sdockerauth
