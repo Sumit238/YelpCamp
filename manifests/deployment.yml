@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "yelpcampk8s-4a19"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "yelpcampk8s-4a19"
+  template:
+    metadata:
+      labels:
+        app: "yelpcampk8s-4a19"
+    spec:
+      containers:
+        - name: "yelpcampk8s-4a19"
+          image: "yelpcampcg.azurecr.io/yelpcampk8s"
+          ports:
+          - containerPort: 80
