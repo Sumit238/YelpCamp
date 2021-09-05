@@ -1,0 +1,41 @@
+.borderCustom {
+  border-radius: 5px;
+}
+.message {
+  padding: 0px;
+  margin: 0px;
+}
+.alerter {
+  position: absolute;
+  width: 30%;
+  top: 75%;
+  left: 68%;
+  padding: 10px;
+  padding-right: 0px;
+  transition-property: color, background-color;
+  transition-duration: 0.5s, 0.5s;
+  transition-timing-function: linear;
+  z-index: 10;
+}
+.closeCustom {
+  text-align: right;
+  font-weight: 900;
+  font-size: 18px;
+  height: 100%;
+}
+.closeCustom:hover {
+  font-weight: 900;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  text-shadow: 1px 1px 2px black;
+}
+.widthZero {
+  color: white;
+  background-color: white;
+}
+@media screen and (max-width: 600px) {
+  .alerter {
+    width: 75%;
+    left: 20%;
+  }
+}

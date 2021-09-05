@@ -1,0 +1,7 @@
+.ellipsis:hover{
+    cursor: pointer;
+    color: grey;
+}
+.ellipsis{
+    font-weight: 500;
+}

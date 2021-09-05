@@ -1,0 +1,14 @@
+FROM node:14
+WORKDIR /usr/src/app
+COPY package*.json ./
+ENV cloudinary_cloud_name=sumitcdn
+ENV cloudinary_api_key=459331374384755 
+ENV cloudinary_api_secret=YMDJSVITrP_gJiIJ6R5kb7k57H0
+ENV map_box_token=pk.eyJ1Ijoic3VtaXQyMzgiLCJhIjoiY2t0M3ozdjNpMHoybDJ1bnpqbW54aWFtZiJ9.tdrXw5wzYqUnZRyGuZTO7w
+ENV dbURL='mongodb://yelpcamp-admin:wOD9iYIBjROfLOXVTDfymijSRUPWhGhaP3gif9QtcBF2YcCzXkc9VEZVo05HobpYKW0Heak3nYIMvM8Q8FJHRw==@yelpcamp-admin.mongo.cosmos.azure.com:10255/YelpCamp?ssl=true&retrywrites=false'
+ENV secret="jrnefoefnwoefnoiefno3inof3nfinewlfkefnekfnfio3f"
+
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD [ "node", "index.js" ]

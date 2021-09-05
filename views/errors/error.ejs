@@ -1,0 +1,9 @@
+<% layout('/layout/boilerplate.ejs') %>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="alert alert-danger text-center " role="alert">
+                <%= `${err.message} ,status code : ${err.statusCode}` %>
+
+            </div>
+        </div>
+    </div>
