@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const nn=0;
 mongoose.connect('mongodb://localhost/YelpCamp', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('connected to database')
