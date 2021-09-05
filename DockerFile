@@ -10,5 +10,5 @@ ENV secret="jrnefoefnwoefnoiefno3inof3nfinewlfkefnekfnfio3f"
 
 RUN npm install
 COPY . .
-EXPOSE 8080
+EXPOSE 80
 CMD [ "node", "index.js" ]
