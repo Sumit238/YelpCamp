@@ -1,3 +1,2 @@
 # YelpCamp
-# YelpCamp
-# YelpCamp
+Social media for camp lovers 
